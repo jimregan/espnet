@@ -1,4 +1,7 @@
 #!/bin/bash
+# Copyright Danijel Koržinek
+# Apache 2.0
+# Original: https://github.com/danijel3/ClarinStudioKaldi
 
 . ./path.sh
 
