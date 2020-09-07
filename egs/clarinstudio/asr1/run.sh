@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Copyright 2017 Johns Hopkins University (Shinji Watanabe)
+# Copyright 2020 Jim O'Regan
 #  Apache 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
 
 . ./path.sh || exit 1;
@@ -33,10 +34,10 @@ recog_model=model.acc.best # set a model to be used for decoding: 'model.acc.bes
 n_average=10
 
 datadir=downloads # original data directory to be stored
-lang=en # en de fr cy tt kab ca zh-TW it fa eu es ru
+lang=pl
 
 # base url for downloads.
-data_url=https://voice-prod-bundler-ee1969a6ce8178826482b88e843c335139bd3fb4.s3.amazonaws.com/cv-corpus-3/$lang.tar.gz
+data_url=http://mowa.clarin-pl.eu/korpusy/audio.tar.gz
 
 # bpemode (unigram or bpe)
 nbpe=150 # 2020 for zh-TW
@@ -61,7 +62,7 @@ recog_set="valid_dev_${lang} valid_test_${lang}"
 if [ ${stage} -le -1 ] && [ ${stop_stage} -ge -1 ]; then 
     echo "stage -1: Data Download"
     mkdir -p ${datadir}
-    local/download_and_untar.sh ${datadir} ${data_url} ${lang}.tar.gz
+    local/download_and_untar.sh ${datadir} ${data_url}
 fi
 
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
