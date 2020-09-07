@@ -10,7 +10,7 @@ fi
 
 data=$1
 
-if [ ! -d $data/audio ];do
+if [ ! -d $data/audio ]; then
     echo "$data directory does not contain audio/ directory"
     exit 0;
 fi
@@ -23,8 +23,8 @@ for i in train test dev; do
     cat local/$i.sessions|while read j; do
         spk=$(cat $data/audio/$j/spk.txt|sed -e 's/^\xEF\xBB\xBF//')
         for k in $data/audio/$j/*.wav; do
-            filename=$(basename $k '.wav')
-            id=${j}_${k}
+            base=$(basename $k '.wav')
+            id=${j}_${base}
             echo "$id $k" >> $data/$i/wav.scp
             txtfile=$(echo $k|sed -e 's/\.wav$/.txt/')
             text=$(cat $txtfile|sed -e 's/^\xEF\xBB\xBF//')
