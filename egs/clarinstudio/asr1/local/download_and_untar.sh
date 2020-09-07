@@ -44,7 +44,7 @@ if [ ! -f $data/audio.tar.gz ]; then
     echo "$0: wget is not installed."
     exit 1;
   fi
-  full_url=$url/audio.tar.gz
+  full_url=$url
   echo "$0: downloading data (4.7 GB) from $full_url."
 
   cd $data
