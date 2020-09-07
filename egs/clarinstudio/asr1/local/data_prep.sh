@@ -3,15 +3,16 @@
 # Copyright 2020 Jim O'Regan
 #  Apache 2.0  (http://www.apache.org/licenses/LICENSE-2.0)
 
-if [ $# -ne 1 ]; then
-  echo "Usage: $0 <data-base>"
+if [ $# -ne 2 ]; then
+  echo "Usage: $0 <data-base> <download-base>"
   exit 0;
 fi
 
 data=$1
+download=$2
 
-if [ ! -d $data/audio ]; then
-    echo "$data directory does not contain audio/ directory"
+if [ ! -d $download/audio ]; then
+    echo "$download directory does not contain audio/ directory"
     exit 0;
 fi
 
@@ -21,8 +22,8 @@ done
 
 for i in train test dev; do
     cat local/$i.sessions|while read j; do
-        spk=$(cat $data/audio/$j/spk.txt|sed -e 's/^\xEF\xBB\xBF//')
-        for k in $data/audio/$j/*.wav; do
+        spk=$(cat $download/audio/$j/spk.txt|sed -e 's/^\xEF\xBB\xBF//')
+        for k in $download/audio/$j/*.wav; do
             base=$(basename $k '.wav')
             id=${j}_${base}
             echo "$id $k" >> $data/$i/wav.scp
