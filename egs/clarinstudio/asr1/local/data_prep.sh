@@ -16,6 +16,10 @@ if [ ! -d $download/audio ]; then
     exit 0;
 fi
 
+if [ ! -d $data ]; then
+    mkdir $data
+fi
+
 for i in train test dev; do
     mkdir $data/$i
 done
@@ -33,4 +37,5 @@ for i in train test dev; do
             echo "$id $spk" >> $data/$i/utt2spk
         done
     done
+    perl utils/utt2spk_to_spk2utt.pl $data/$i/utt2spk > $data/$i/spk2utt
 done

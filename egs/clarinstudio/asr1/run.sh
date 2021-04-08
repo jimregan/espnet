@@ -68,17 +68,7 @@ fi
 if [ ${stage} -le 0 ] && [ ${stop_stage} -ge 0 ]; then
     ### Task dependent. You have to make data the following preparation part by yourself.
     ### But you can utilize Kaldi recipes in most cases 
-    local/data_prep.sh ${datadir} data
-
-    # Kaldi Version Split
-    # ./utils/subset_data_dir_tr_cv.sh data/validated data/valid_train data/valid_test_dev
-    # ./utils/subset_data_dir_tr_cv.sh --cv-spk-percent 50 data/valid_test_dev data/valid_test data/valid_dev
-
-    # ESPNet Version (same as voxforge)
-    # consider duplicated sentences (does not consider speaker split)
-    # filter out the same sentences (also same text) of test&dev set from validated set
-    echo data/${train_set} data/${train_dev} data/${test_set}
-    local/split_tr_dt_et.sh data/${train_set} data/${train_dev} data/${test_set}
+    local/data_prep.sh data ${datadir}
 fi
 
 feat_tr_dir=${dumpdir}/${train_set}/delta${do_delta}; mkdir -p ${feat_tr_dir}
